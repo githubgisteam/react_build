@@ -19,8 +19,8 @@ mongoose.connect("mongodb://admin:admin123@ds235850.mlab.com:35850/leave_managem
 });
 
 var originsWhitelist = [
-    'http://localhost:3001'
-    ];
+    'https://murmuring-springs-71280.herokuapp.com'
+    ];  
     var corsOptions = {
     origin: function(origin, callback){
     var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
