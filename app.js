@@ -62,6 +62,8 @@ res.json({message : 'User created'})
 
 
 app.use('/api',route);
-app.listen(3000,function(){
-    console.log('Server starts..');
-})
+
+var port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function () {
+    console.log("Listening on --- Port 3000");
+});    
