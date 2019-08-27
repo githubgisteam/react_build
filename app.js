@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 var SolrNode = require('solr-node');
 var client = new SolrNode({
-    host: 'localhost',
+    host: '10.75.65.182',
     port: '8983',
     core: 'collection2',
     protocol: 'http'
