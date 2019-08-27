@@ -9,17 +9,17 @@ var User = require('./models/user.model');
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
-
-var SolrNode = require('solr-node');
-var client = new SolrNode({
-    host: 'localhost',
-    port: '8983',
-    core: 'collection2',
-    protocol: 'http'
+//start mongoDB
+mongoose.connect("mongodb://admin:admin123@ds235850.mlab.com:35850/leave_management", { useNewUrlParser: true }).then(
+    (res) => {
+        console.log("Connected to Database Successfully.");
+    }
+).catch(() => {
+    console.log("Conntection to database failed.");
 });
-console.log("hiii",client )
+
 var originsWhitelist = [
-    'http://localhost:5000'
+    'http://localhost:3000'
     ];
     var corsOptions = {
     origin: function(origin, callback){
@@ -36,15 +36,27 @@ route.get('/',function(req,res){
 })
 
 route.get('/users',function(req,res){
-    var strQuery = client.query().q('text:Error');
-    client.search(strQuery, function (err, result) {
-        if (err) {
-           console.log(err);
-           return;
+	console.log("hiiii")
+    User.find({},function(err,users){
+        if(err){
+            console.log('The error is ',err);
+            return;
         }
-        console.log('Response:', result.response);
-        res.json({data : result.response})
-     });
+		console.log("result", users)
+        res.json({data : users})
+    })
+})
+
+route.post('/users',function(req,res){
+    console.log('The request is ',req.body)
+User.create(req.body,function(err,user){
+	console.log("error is here", err ,"or result", user);
+if(err){
+    console.log('The err is -----> ',err);
+    return;
+}
+res.json({message : 'User created'})
+})
 })
 
 
