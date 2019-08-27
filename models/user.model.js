@@ -7,4 +7,4 @@ var userSchema = new mongoose.Schema({
     age : Number
 });
 console.log("after schema")
-module.exports = mongoose.model('user',userSchema);
+module.exports = mongoose.model('test',userSchema);

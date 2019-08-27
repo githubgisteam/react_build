@@ -10,9 +10,13 @@ var User = require('./models/user.model');
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 //start mongoDB
-mongoose.connect('mongodb://localhost:27017/company',function(){
-    console.log('database connected')
-})
+mongoose.connect("mongodb://admin:admin123@ds235850.mlab.com:35850/leave_management", { useNewUrlParser: true }).then(
+    (res) => {
+        console.log("Connected to Database Successfully.");
+    }
+).catch(() => {
+    console.log("Conntection to database failed.");
+});
 
 var originsWhitelist = [
     'http://localhost:3001'
